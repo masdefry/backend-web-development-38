@@ -10,17 +10,23 @@ Hello, students 👋!
 
     3. Install Express Typescript & Nodemon
 
-            ➡️ npm i express
+            ➡️ npm i express 
 
             ➡️ npm i --save-dev @types/express
 
             ➡️ npm i -D typescript ts-node nodemon
+ 
+    4. Install Postgrees
 
-    4. Initiate Typescript Configuration
+            ➡️ npm i pg    
+
+            ➡️ npm i @types/pg --save-dev
+
+    5. Initiate Typescript Configuration
 
             ➡️ npx tsc --init
 
-    5. Replace `tsconfig.json` with This Configuration:
+    6. Replace `tsconfig.json` with This Configuration:
 
             {
                 "compilerOptions": {
@@ -34,7 +40,7 @@ Hello, students 👋!
                 }
             }
 
-    6. Replace Property `scripts` on `package.json` with this Code:
+    7. Replace Property `scripts` on `package.json` with this Code:
 
             "scripts": {
                 "dev": "nodemon src/server.ts",
@@ -42,6 +48,6 @@ Hello, students 👋!
                 "start": "node dist/server.js",
             }
 
-    7. Running Express Typescript Projects
+    8. Running Express Typescript Projects
 
             ➡️ npm run dev

@@ -1,6 +1,0 @@
-{
-  "products": [
-    { "id": 1, "name": "Minyak", "price": 40000, "unit": "PACK" },
-    { "id": 2, "name": "Indomie", "price": 3250, "stock": 150, "unit": "PCS" }
-  ]
-}

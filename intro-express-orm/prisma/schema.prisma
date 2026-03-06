@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Member {
+  id             String   @id @default(uuid())
+  firstName      String   @db.VarChar(50)
+  lastName       String   @db.VarChar(50)
+  address        String   @db.VarChar(255)
+  email          String   @db.VarChar(100)
+  expirationDate DateTime @db.Date
+  phoneNumber    String   @db.VarChar(12)
+
+  transactions Transaction[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("members")
+}
+
+model Staff {
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
+  birthDate DateTime @db.Date
+  role      Role
+  email     String
+  password  String
+  hireAt    DateTime @db.Date
+
+  transactions Transaction[]
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  deletedAt DateTime?
+}
+
+enum Role {
+  STAFF
+  ADMIN
+  MANAGER
+}
+
+model Book {
+  id          String   @id @default(uuid())
+  isbn        String
+  title       String
+  author      String
+  releaseDate DateTime @db.Date
+  publisher   String
+  category    Category
+
+  transactionItems TransactionItem[]
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  deletedAt DateTime?
+}
+
+enum Category {
+  COMEDI
+  HOROR
+  FANTASY
+  FRICTION
+  HISTORY
+}
+
+model Transaction {
+  id         String   @id @default(uuid())
+  returnDate DateTime @db.Date
+  fineFee    Int
+
+  staffId String
+  staffs  Staff  @relation(fields: [staffId], references: [id])
+
+  memberId String
+  members  Member @relation(fields: [memberId], references: [id])
+
+  transationItems TransactionItem[]
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  deletedAt DateTime?
+}
+
+model TransactionItem {
+  id String @id @default(uuid())
+
+  transactionId String
+  transactions  Transaction @relation(fields: [transactionId], references: [id])
+
+  bookId String
+  books  Book   @relation(fields: [bookId], references: [id])
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  deletedAt DateTime?
+}

@@ -15,12 +15,6 @@ Hello, students 👋!
             ➡️ npm i --save-dev @types/express
 
             ➡️ npm i -D typescript ts-node nodemon
- 
-    4. Install Postgrees
-
-            ➡️ npm i pg    
-
-            ➡️ npm i @types/pg --save-dev
 
     5. Initiate Typescript Configuration
 
@@ -51,3 +45,7 @@ Hello, students 👋!
     8. Running Express Typescript Projects
 
             ➡️ npm run dev
+
+🧑‍💻 How to Setup Prisma ORM?
+
+        1. 

@@ -11,15 +11,23 @@ export const authService = {
     role,
     hireAt,
   }: Omit<Staff, 'id' | 'createdAt' | 'deletedAt' | 'updatedAt'>) {
+    const findStaffByEmail = await prisma.staff.findFirst({
+      where: {
+        email: email
+      }
+    })
+
+    if(findStaffByEmail) throw new Error('Email staff already registered')
+
     await prisma.staff.create({
       data: {
         firstName,
         lastName,
         email,
         password,
-        birthDate,
+        birthDate: new Date(birthDate),
         role,
-        hireAt,
+        hireAt: new Date(hireAt),
       },
     });
   },

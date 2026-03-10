@@ -11,26 +11,26 @@ export type MenuSidebar = {
 export const menuSidebar = [
   {
     title: 'Dashboard',
-    icon: <MdDashboard className='text-3xl' />,
+    icon: <MdDashboard className='text-2xl' />,
   },
   {
     title: 'Buku',
-    icon: <MdBook className='text-3xl' />,
+    icon: <MdBook className='text-2xl' />,
   },
   {
     title: 'Anggota',
-    icon: <BsFillPeopleFill className='text-3xl' />,
+    icon: <BsFillPeopleFill className='text-2xl' />,
   },
   {
     title: 'Peminjaman',
-    icon: <GoArrowSwitch className='text-3xl' />,
+    icon: <GoArrowSwitch className='text-2xl' />,
   },
   {
     title: 'Laporan',
-    icon: <TbReportAnalytics className='text-3xl' />,
+    icon: <TbReportAnalytics className='text-2xl' />,
   },
   {
     title: 'Pengaturan',
-    icon: <TbSettingsFilled className='text-3xl' />,
+    icon: <TbSettingsFilled className='text-2xl' />,
   },
 ];

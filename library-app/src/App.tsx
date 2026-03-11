@@ -2,7 +2,24 @@ import { BsPersonAdd } from 'react-icons/bs';
 import { IoSearchOutline } from 'react-icons/io5';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { BiEdit } from 'react-icons/bi';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 export default function App() {
+  const [members, setMembers] = useState<any[]>([]);
+
+  const onGetMembers = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/members');
+      setMembers(response?.data?.data?.members);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    onGetMembers();
+  }, []);
+
   return (
     <main className='p-10'>
       <div className='flex items-center justify-between'>
@@ -45,20 +62,23 @@ export default function App() {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr>
-                <th>1</th>
-                <td>Muhammad Defryan</td>
-                <td>
-                  <span className='py-1 px-5 bg-green-200 rounded-full'>
-                    Aktif
-                  </span>
-                </td>
-                <td className='flex items-center gap-3'>
-                  <BiEdit className='text-2xl text-blue-500' />
-                  <FaRegTrashCan className='text-xl text-red-500' />
-                </td>
-              </tr>
+              {members?.map((member: any, index: number) => {
+                return (
+                  <tr key={index}>
+                    <th>{member?.id}</th>
+                    <td>{member?.firstName} {member?.lastName}</td>
+                    <td>
+                      <span className='py-1 px-5 bg-green-200 rounded-full'>
+                        {member?.status}
+                      </span>
+                    </td>
+                    <td className='flex items-center gap-3'>
+                      <BiEdit className='text-2xl text-blue-500' />
+                      <FaRegTrashCan className='text-xl text-red-500' />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

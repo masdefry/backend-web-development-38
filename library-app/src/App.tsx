@@ -7,10 +7,15 @@ import { useEffect, useState } from 'react';
 export default function App() {
   const [members, setMembers] = useState<any[]>([]);
   const [totalPage, setTotalPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
 
   const onGetMembers = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/members');
+      const response = await axios.get('http://localhost:8000/api/members', {
+        params: {
+          page
+        }
+      });
       setMembers(response?.data?.data?.members);
       setTotalPage(response?.data?.data?.totalPage);
     } catch (error) {
@@ -20,7 +25,7 @@ export default function App() {
 
   useEffect(() => {
     onGetMembers();
-  }, []);
+  }, [page]);
 
   return (
     <main className='p-10'>
@@ -91,7 +96,7 @@ export default function App() {
               {Array.from({ length: totalPage }, (v, i) => i + 1)?.map(
                 (page: number, index: number) => {
                   return (
-                    <button key={index} className='join-item btn btn-xs'>
+                    <button onClick={() => setPage(page)} key={index} className='join-item btn btn-xs'>
                       {page}
                     </button>
                   );
